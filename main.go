@@ -56,6 +56,7 @@ import (
 	"sigs.k8s.io/external-dns/provider/infoblox"
 	"sigs.k8s.io/external-dns/provider/inmemory"
 	"sigs.k8s.io/external-dns/provider/linode"
+	"sigs.k8s.io/external-dns/provider/metal"
 	"sigs.k8s.io/external-dns/provider/ns1"
 	"sigs.k8s.io/external-dns/provider/oci"
 	"sigs.k8s.io/external-dns/provider/ovh"
@@ -244,6 +245,8 @@ func main() {
 		p, err = ovh.NewOVHProvider(ctx, domainFilter, cfg.OVHEndpoint, cfg.OVHApiRateLimit, cfg.DryRun)
 	case "linode":
 		p, err = linode.NewLinodeProvider(domainFilter, cfg.DryRun, externaldns.Version)
+	case "metal":
+		p, err = metal.NewMetalProvider(ctx, domainFilter, cfg.DryRun)
 	case "dnsimple":
 		p, err = dnsimple.NewDnsimpleProvider(domainFilter, zoneIDFilter, cfg.DryRun)
 	case "infoblox":
